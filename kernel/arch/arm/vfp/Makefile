@@ -7,7 +7,7 @@
 # ccflags-y := -DDEBUG
 # asflags-y := -DDEBUG
 
-KBUILD_AFLAGS	:=$(KBUILD_AFLAGS:-msoft-float=-Wa,-mfpu=neon -O3 -ftree-vectorize -mfloat-abi=(softfp|hard) -ffast-math -fsingle-precision-constant  )
+KBUILD_AFLAGS	:=$(KBUILD_AFLAGS:-msoft-float=-Wa,-mfpu=neon -O3 -ftree-vectorize -ffast-math -fsingle-precision-constant  )
 LDFLAGS		+=--no-warn-mismatch
 
 obj-y			+= vfp.o
