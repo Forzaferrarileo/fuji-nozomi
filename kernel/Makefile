@@ -351,11 +351,11 @@ CC		= $(srctree)/scripts/gcc-wrapper.py $(REAL_CC)
 
 CHECKFLAGS     := -D__linux__ -Dlinux -D__STDC__ -Dunix -D__unix__ \
 		  -Wbitwise -Wno-return-void $(CF)
-MODFLAGS  = -DMODULE -fgcse-lm -fgcse-sm -fsched-spec-load -fforce-addr -ffast-math -fsingle-precision-constant -mtune=cortex-a8 -marm -march=armv7-a -mfpu=neon -ftree-vectorize -funroll-loops
+MODFLAGS  = -DMODULE -fgcse-lm -fgcse-sm -fsched-spec-load -fforce-addr -ffast-math -fsingle-precision-constant -O3 -mtune=cortex-a8 -marm -march=armv7-a -mfpu=neon -ftree-vectorize -funroll-loops
 CFLAGS_MODULE = $(MODFLAGS)
 AFLAGS_MODULE = $(MODFLAGS)
 LDFLAGS_MODULE = -T $(srctree)/scripts/module-common.lds
-CFLAGS_KERNEL  = -fgcse-lm -fgcse-sm -fsched-spec-load -fforce-addr -ffast-math -fsingle-precision-constant -mtune=cortex-a8 -marm -march=armv7-a -mfpu=neon -ftree-vectorize -funroll-loops
+CFLAGS_KERNEL  = -fgcse-lm -fgcse-sm -fsched-spec-load -fforce-addr -ffast-math -fsingle-precision-constant -O3 -mtune=cortex-a8 -marm -march=armv7-a -mfpu=neon -ftree-vectorize -funroll-loops
 CFLAGS_GCOV	= -fprofile-arcs -ftest-coverage
 
 
@@ -564,8 +564,12 @@ all: vmlinux
 
 ifdef CONFIG_CC_OPTIMIZE_FOR_SIZE
 KBUILD_CFLAGS	+= -Os
-else
+endif
+ifdef CONFIG_CC_OPTIMIZE_DEFAULT
 KBUILD_CFLAGS	+= -O2
+endif
+IFDEF CONFIG_CC_OPTIMIZE_ALOT
+KBULID_CFLAGS	+= -03
 endif
 
 include $(srctree)/arch/$(SRCARCH)/Makefile
