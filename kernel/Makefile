@@ -571,6 +571,9 @@ endif
 IFDEF CONFIG_CC_OPTIMIZE_ALOT
 KBULID_CFLAGS	+= -03
 endif
+ifdef CONFIG_CC_OPTIMIZE_FAST
+KBUILD_CFLAGS += -Ofast
+endif
 
 include $(srctree)/arch/$(SRCARCH)/Makefile
 
