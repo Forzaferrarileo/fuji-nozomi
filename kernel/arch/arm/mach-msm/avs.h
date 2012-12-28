@@ -55,15 +55,15 @@ static inline void avs_disable(void) {}
 #define AVSDEBUG(...)
 
 #define AVS_DISABLE(cpu) do { \
-if (get_cpu() == (cpu)) \
-avs_disable(); \
-put_cpu(); \
-} while (0);
-
+	if (get_cpu() == (cpu)) \
+	  avs_disable(); \
+	put_cpu(); \
+      } while (0);
+	
 #define AVS_ENABLE(cpu, x) do { \
-if (get_cpu() == (cpu)) \
-avs_reset_delays((x)); \
-put_cpu(); \
-} while (0);
+	if (get_cpu() == (cpu)) \
+	  avs_reset_delays((x)); \
+	put_cpu(); \
+      } while (0);
 
 #endif /* AVS_H */
