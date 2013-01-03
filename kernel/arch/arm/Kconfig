@@ -232,6 +232,19 @@ source "kernel/Kconfig.freezer"
 
 menu "System Type"
 
+config SCHED_MC
+	bool"Multi-core scheduler support"
+	depends on SMP && ARM_CPU_TOPOLOGY
+	default n
+
+config SCHED_SMT
+	bool "SMT scheduler support"
+	default n
+
+config ARM_CPU_TOPOLOGY
+	bool "Support cpu topology definition"
+	depends on SMP && CPU_V7
+
 config MMU
 	bool "MMU-based Paged Memory Management Support"
 	default y
@@ -1772,6 +1785,11 @@ config CC_STACKPROTECTOR
 	  overwrite the canary, which gets detected and the attack is then
 	  neutralized via a kernel panic.
 	  This feature requires gcc version 4.2 or above.
+
+config ALLOW_CPU_ALIGNMENT
+	bool "Allow Cpu-Based alignement Handling"
+	default n if ARCH_MSM_SCORPION || ARCH_MSM_SCORPIONMP
+
 
 config DEPRECATED_PARAM_STRUCT
 	bool "Provide old way to pass kernel parameters"

@@ -30,6 +30,7 @@
 #include <asm/cacheflush.h>
 #include <asm/cpu.h>
 #include <asm/cputype.h>
+#include <asm/topology.h>
 #include <asm/exception.h>
 #include <asm/topology.h>
 #include <asm/mmu_context.h>
@@ -289,6 +290,9 @@ static void __cpuinit smp_store_cpu_info(unsigned int cpuid)
 	struct cpuinfo_arm *cpu_info = &per_cpu(cpu_data, cpuid);
 
 	cpu_info->loops_per_jiffy = loops_per_jiffy;
+
+	store_cpu_topology(cpuid);
+
 }
 
 /*
@@ -378,6 +382,8 @@ void __init smp_prepare_boot_cpu(void)
 void __init smp_prepare_cpus(unsigned int max_cpus)
 {
 	unsigned int ncores = num_possible_cpus();
+
+	init_cpu_topology();
 
 	smp_store_cpu_info(smp_processor_id());
 
