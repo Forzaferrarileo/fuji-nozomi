@@ -901,6 +901,7 @@ struct sched_group_power {
 	 * single CPU.
 	 */
 	unsigned int power, power_orig;
+	unsigned int long next_update;
 };
 
 struct sched_group {
